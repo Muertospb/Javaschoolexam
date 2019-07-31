@@ -62,7 +62,6 @@ public class Calculator {
                 }
                 continue;
             }
-
             if (isOperator(currentToken)) {
                 if (stack.isEmpty()){
                     stack.push(currentToken);
@@ -81,8 +80,6 @@ public class Calculator {
                         stack.push(currentToken);
                     }
                 }
-
-
             }
             else {
                 if (currentToken.equals("(") || currentToken.equals("<")) {
@@ -91,35 +88,7 @@ public class Calculator {
                 else {
                     parsedList.add(currentToken);
                 }
-
             }
-
-
-
-
-//            else if (isBreakPoint(currentToken)) {
-//                if (currentToken.equals("(")) stack.push(currentToken);
-//                else if (currentToken.equals(")")) {
-//                    while (!stack.peek().equals("(")) {
-//                        parsedList.add(stack.pop());
-//                        if (stack.isEmpty()) {
-//                            return null;
-//                        }
-//                    }
-//                    stack.pop();
-//                    if (!stack.isEmpty() && isOperator(stack.peek())) {
-//                        parsedList.add(stack.pop());
-//                    }
-//                }
-//                if (currentToken.equals("-") && (prevToken.equals("") || (isBreakPoint(prevToken)  && !prevToken.equals(")")))) {
-//                    currentToken = "u-";
-//                    while (!stack.isEmpty() && (priority(currentToken) <= priority(stack.peek()))) {
-//                        parsedList.add(stack.pop());
-//                    }
-//                    stack.push(currentToken);
-//                }
-//            }
-
             prevToken = currentToken;
         }
         if (stack.size() == 0) return null;
@@ -132,12 +101,7 @@ public class Calculator {
 
         Deque<Double> evaluateStack = new ArrayDeque<Double>();
         for (String x : parsedList) {
-            /*if (x.equals("sqrt")) evaluateStack.push(Math.sqrt(evaluateStack.pop()));
-            else if (x.equals("cube")) {
-                Double tmp = evaluateStack.pop();
-                evaluateStack.push(tmp * tmp * tmp);
-            } else if (x.equals("pow10")) evaluateStack.push(Math.pow(10, evaluateStack.pop()));
-            else*/ if (x.equals("+")) evaluateStack.push(evaluateStack.pop() + evaluateStack.pop());
+           if (x.equals("+")) evaluateStack.push(evaluateStack.pop() + evaluateStack.pop());
             else if (x.equals("-")) {
                 Double b = evaluateStack.pop(), a = evaluateStack.pop();
                 evaluateStack.push(a - b);
@@ -146,7 +110,7 @@ public class Calculator {
                 Double b = evaluateStack.pop(), a = evaluateStack.pop();
                 if (b == 0) return null;
                 evaluateStack.push(a / b);
-            } else if (x.equals("u-")) evaluateStack.push(-evaluateStack.pop());
+            }
             else
                 try {
                     evaluateStack.push(Double.valueOf(x));
@@ -173,7 +137,6 @@ public class Calculator {
 
     //Checks if token is an Operator
     private static boolean isOperator(String token) {
-        if (token.equals("u-")) return true;
         if (token.equals("")) return false;
         for (int i = 0; i < operationSings.length(); i++) {
             if (token.charAt(0) == operationSings.charAt(i)) return true;
