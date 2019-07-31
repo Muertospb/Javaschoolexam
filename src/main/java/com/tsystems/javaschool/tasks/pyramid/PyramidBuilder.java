@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.tasks.pyramid;
 
-import java.util.List;
+import java.util.*;
 
 public class PyramidBuilder {
 
@@ -14,7 +14,47 @@ public class PyramidBuilder {
      */
     public int[][] buildPyramid(List<Integer> inputNumbers) {
         // TODO : Implement your solution here
-        return new int[0][0];
+        if (inputNumbers.contains(null)) {
+            throw new CannotBuildPyramidException();
+        }
+        int rowCounter = 1;
+        int i = 0;
+        while (rowCounter <= Integer.MAX_VALUE){
+            if (i + rowCounter == inputNumbers.size()) break;
+            i = i + rowCounter;
+            rowCounter++;
+            if (rowCounter == 999){
+                throw new CannotBuildPyramidException();
+            }
+        }
+        int columnCounter = rowCounter * 2 - 1;
+        //Если использование Коллекций запрещено, то здесь можно использовать пузырьковую сортировку
+        Collections.sort(inputNumbers);
+
+        int[][] pyramid = new int[rowCounter][columnCounter];
+
+        //Заполняем нулями
+        for (int r = 0; r < rowCounter; r++){
+            for (int c = 0; c < columnCounter; c++){
+                pyramid[r][c] = 0;
+            }
+        }
+
+        //Вносим значения из листа
+        int listCounter = 0;
+        for (int r = 0; r < rowCounter; r++){
+            int firstInsertionInRow = rowCounter - r -1;
+            int counterOfInsertion = 0;
+            while (counterOfInsertion < r + 1){
+                pyramid[r][firstInsertionInRow] = inputNumbers.get(listCounter++);
+                firstInsertionInRow = firstInsertionInRow + 2;
+                counterOfInsertion = counterOfInsertion + 1;
+            }
+        }
+
+
+
+        return pyramid;
     }
 
 
