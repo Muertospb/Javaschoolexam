@@ -12,7 +12,7 @@ The exam includes 3 tasks to be done: [Calculator](/tasks/Calculator.md), [Pyram
 ### Result ###
 
 * Author name : {Dmitriy Ivasishin}
-* Codeship : {}
+* Codeship : {[![Codeship Status for Muertospb/Javaschoolexam](https://app.codeship.com/projects/6c57c180-95cd-0137-05b0-7e1171adf3a8/status?branch=master)](https://app.codeship.com/projects/357261)}
 
 ### How to start?  ###
 * Install [GIT](https://git-scm.com/) and [Maven](https://maven.apache.org)
